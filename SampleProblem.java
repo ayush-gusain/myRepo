@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
@@ -38,7 +37,7 @@ class Convert implements Runnable
 					int corrInteger=Integer.parseInt(s);
 					String hexString=Integer.toHexString(corrInteger);
 					
-					File newfile=new File("hexMapFile.txt");
+					File newfile=new File("hxxMapFile.txt");
 					try {
 						FileWriter fr=new FileWriter(newfile,true);
 						BufferedWriter br= new BufferedWriter(fr);
@@ -84,23 +83,14 @@ public class SampleProblem {
 		}
 		int i=0;
 		
-		Runnable r1=new Convert(i,arr);
-		i+=5;
-		Runnable r2=new Convert(i,arr);
-		i+=5;
-		Runnable r3=new Convert(i,arr);
-		i+=5;
-		Runnable r4=new Convert(i,arr);
-		i+=5;
-		Runnable r5=new Convert(i,arr);
-		
 		ExecutorService pool=Executors.newFixedThreadPool(MAX_T);
 		
-		pool.execute(r1);
-		pool.execute(r2);
-		pool.execute(r3);
-		pool.execute(r4);
-		pool.execute(r5);
+		while(i<arr.size())
+		{
+			Runnable r=new Convert(i,arr);
+			pool.execute(r);
+			i+=5;
+		}
 		
 		pool.shutdown();
 		
