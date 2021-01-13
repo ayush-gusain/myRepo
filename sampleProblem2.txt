@@ -1,0 +1,5 @@
+create view viewname as
+select pos.position_id, depo.depo_id, depo.depo_ky, sec.description, postype.position_type_id, cur.currency_ky, postype.position_type, sec.security_id, cur.currency_id
+from t_position pos join t_depository depo on pos.depo_id=depo.depo_id join t_security sec on sec.security_id=pos.security_id join t_currency cur on cur.currency_id=pos.currency_id join t_positiontype postype on postype.position_type_id=pos.position_type_id;
+
+select * from viewname;
